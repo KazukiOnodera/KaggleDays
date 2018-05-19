@@ -21,13 +21,22 @@ test  = utils.load_test()
 
 wiki_en = utils_nlp.load_fasttext_wiki_en()
 valid_words = set(wiki_en.get_words())
+DIM = wiki_en.get_dimension()
+
+
+def preprocess(s):
+    return [w.lower() for w in s.split()]
 
 def get_vector_with_words_sum(s):
-    sen = [w for w in s.split() if w in valid_words]
+    sen = [w for w in s if w in valid_words]
+    if len(sen)==0:
+        return np.zeros(DIM)-1
     return utils_nlp.sent2vec(sen, wiki_en, method='sum')
 
 def get_vector_with_words_mean(s):
-    sen = [w for w in s.split() if w in valid_words]
+    sen = [w for w in s if w in valid_words]
+    if len(sen)==0:
+        return np.zeros(DIM)-1
     return utils_nlp.sent2vec(sen, wiki_en, method='mean')
 
 st_time = time()
@@ -39,14 +48,17 @@ def make_features(p):
         df=test
         name='test'
     
+    df['q'] = df['question_text'].map(preprocess)
+    df['a'] = df['answer_text'].map(preprocess)
+    
     # get vec
     print(name, 'sum', round(st_time - time(), 4))
-    question_vec_sum = pd.DataFrame(list(df['question_text'].map(get_vector_with_words_sum))).add_prefix('q_vec_sum_')
-    answer_vec_sum   = pd.DataFrame(list(df['answer_text'].map(get_vector_with_words_sum))).add_prefix('a_vec_sum_')
+    question_vec_sum = pd.DataFrame(list(df['q'].map(get_vector_with_words_sum))).add_prefix('q_vec_sum_')
+    answer_vec_sum   = pd.DataFrame(list(df['a'].map(get_vector_with_words_sum))).add_prefix('a_vec_sum_')
     
     print(name, 'mean', round(st_time - time(), 4))
-    question_vec_mean = pd.DataFrame(list(df['question_text'].map(get_vector_with_words_mean))).add_prefix('q_vec_mean_')
-    answer_vec_mean   = pd.DataFrame(list(df['answer_text'].map(get_vector_with_words_mean))).add_prefix('a_vec_mean_')
+    question_vec_mean = pd.DataFrame(list(df['q'].map(get_vector_with_words_mean))).add_prefix('q_vec_mean_')
+    answer_vec_mean   = pd.DataFrame(list(df['a'].map(get_vector_with_words_mean))).add_prefix('a_vec_mean_')
     
     result = pd.concat([question_vec_sum, answer_vec_sum, question_vec_mean, answer_vec_mean], axis=1)
     
