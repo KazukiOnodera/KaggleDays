@@ -18,7 +18,8 @@ test  = utils.load_test()
 stopwords = set(stopwords.words('english'))
 
 def remve_stop(s):
-    s = [w for w in s.split() if s not in stopwords]
+    s = [w.lower() for w in s.split()]
+    s = [w for w in s if w not in stopwords]
     return s
 
 def make_features(df):
