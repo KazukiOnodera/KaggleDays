@@ -10,7 +10,7 @@ import pandas as pd
 from multiprocessing import Pool
 import utils_nlp
 import utils
-#utils.start(__file__)
+utils.start(__file__)
 #==============================================================================
 
 train = utils.read_pickles('../data/201_train')
@@ -35,7 +35,7 @@ def make_features(p):
     
     vec_df = df.apply(get_sim, axis=1)
     df['cosine_sim'] = vec_df.apply(lambda x: x[0])
-    df['cosine_sim_stop'] = vec_df.apply(lambda x: x[1])
+    df['cosine_sim_mean'] = vec_df.apply(lambda x: x[1])
     
     utils.to_pickles(result, f'../data/203_{name}', utils.SPLIT_SIZE)
 
