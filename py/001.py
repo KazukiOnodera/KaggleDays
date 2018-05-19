@@ -70,39 +70,39 @@ def multi_a(args):
 
 # for Q
 pool = Pool(16)
-args = zip(range(len(question)), ['es']*range(len(question)))
+args = zip(range(len(question)), ['es']*len(question))
 result = pool.map(multi_q, range(len(question)))
 question['q_es'] = result
 utils.to_pickles(question, '../data/question_es', utils.SPLIT_SIZE)
 pool.close()
 
 pool = Pool(16)
-args = zip(range(len(question)), ['de']*range(len(question)))
+args = zip(range(len(question)), ['de']*len(question))
 result = pool.map(multi_q, range(len(question)))
 question['q_de'] = result
 pool.close()
 
 pool = Pool(16)
-args = zip(range(len(question)), ['fr']*range(len(question)))
+args = zip(range(len(question)), ['fr']*len(question))
 result = pool.map(multi_q, range(len(question)))
 question['q_fr'] = result
 pool.close()
 
 # for A
 pool = Pool(16)
-args = zip(range(len(answer)), ['es']*range(len(answer)))
+args = zip(range(len(answer)), ['es']*len(answer))
 result = pool.map(multi_a, range(len(answer)))
 answer['a_es'] = result
 pool.close()
 
 pool = Pool(16)
-args = zip(range(len(answer)), ['de']*range(len(answer)))
+args = zip(range(len(answer)), ['de']*len(answer))
 result = pool.map(multi_a, range(len(answer)))
 answer['a_de'] = result
 pool.close()
 
 pool = Pool(16)
-args = zip(range(len(answer)), ['fr']*range(len(answer)))
+args = zip(range(len(answer)), ['fr']*len(answer))
 result = pool.map(multi_a, range(len(answer)))
 answer['a_fr'] = result
 pool.close()
