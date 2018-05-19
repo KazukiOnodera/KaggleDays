@@ -24,7 +24,7 @@ def remve_stop(s):
 def make_features(df):
     init_col = df.columns.tolist()
     
-    # length features
+    # 
     df['q_stop'] = df['question_text'].map(remve_stop)
     df['a_stop'] = df['answer_text'].map(remve_stop)
     
