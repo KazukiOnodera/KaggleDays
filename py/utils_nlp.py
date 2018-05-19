@@ -370,25 +370,27 @@ def quadterms(words, join_string):
 #}
 
 
-def ngrams(words, ngram, join_string=" "):
+def ngrams(words, n, join_string=" "):
     """wrapper for ngram"""
-    if ngram == 1:
+    if n == 1:
         return unigrams(words)
-    elif ngram == 2:
+    elif n == 2:
         return bigrams(words, join_string)
-    elif ngram == 3:
+    elif n == 3:
         return trigrams(words, join_string)
-    elif ngram == 4:
+    elif n == 4:
         return quadgrams(words, join_string)
-    elif ngram == 12:
+    elif n == 12:
         unigram = unigrams(words)
         bigram = [x for x in bigrams(words, join_string) if len(x.split(join_string)) == 2]
         return unigram + bigram
-    elif ngram == 123:
+    elif n == 123:
         unigram = unigrams(words)
         bigram = [x for x in bigrams(words, join_string) if len(x.split(join_string)) == 2]
         trigram = [x for x in trigrams(words, join_string) if len(x.split(join_string)) == 3]
         return unigram + bigram + trigram
+    else:
+        raise Exception(f'ngrams Unexpected n: {n}')
 
 
 #_nterm_str_map = {
@@ -400,16 +402,21 @@ def ngrams(words, ngram, join_string=" "):
 #}
 
 
-def _nterms(words, nterm, join_string=" "):
-    """wrapper for nterm"""
-    if nterm == 1:
+def nterms(words, n, join_string=" "):
+    """
+    words: list of word
+    n: int
+    """
+    if n == 1:
         return uniterms(words)
-    elif nterm == 2:
+    elif n == 2:
         return biterms(words, join_string)
-    elif nterm == 3:
+    elif n == 3:
         return triterms(words, join_string)
-    elif nterm == 4:
+    elif n == 4:
         return quadterms(words, join_string)
+    else:
+        raise Exception(f'nterms Unexpected n: {n}')
 
 
 # =============================================================================
