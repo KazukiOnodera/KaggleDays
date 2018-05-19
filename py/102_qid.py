@@ -11,7 +11,7 @@ import numpy as np
 import gc
 from multiprocessing import Pool
 import utils
-#utils.start(__file__)
+utils.start(__file__)
 #==============================================================================
 
 
