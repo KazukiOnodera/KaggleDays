@@ -31,7 +31,7 @@ def make_features(df):
     df['a_dow']  = df['answer_utc'].dt.dayofweek
     df['a_hour'] = df['answer_utc'].dt.hour
     
-    df['timediff_a-q'] = df['answer_utc'] - df['question_utc']
+    df['timediff_a-q'] = (df['answer_utc'] - df['question_utc']).dt.seconds
     
     # length features
     df['q_len'] = df['question_text'].map(len)
