@@ -23,11 +23,15 @@ def count_unq_words(s):
     return len( set(s.split()) )
 
 def make_features(df):
+    init_col = df.columns.tolist()
+    
     # datetime features
     df['q_dow']  = df['question_utc'].dt.dayofweek
     df['q_hour'] = df['question_utc'].dt.hour
     df['a_dow']  = df['answer_utc'].dt.dayofweek
     df['a_hour'] = df['answer_utc'].dt.hour
+    
+    df['timediff_a-q'] = df['answer_utc'] - df['question_utc']
     
     # length features
     df['q_len'] = df['question_text'].map(len)
@@ -36,6 +40,8 @@ def make_features(df):
     df['a_count_words'] = df['answer_text'].map(count_words)
     df['q_count_unq_words'] = df['question_text'].map(count_unq_words)
     df['a_count_unq_words'] = df['answer_text'].map(count_unq_words)
+    
+    df.drop(init_col, axis=1, inplace=True)
 
 # =============================================================================
 # main
