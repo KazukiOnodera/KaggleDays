@@ -24,7 +24,6 @@ def get_sim(s):
     
     return cosine_sim, cosine_sim_
 
-st_time = time()
 def make_features(p):
     if p==0:
         df=train
@@ -41,7 +40,7 @@ def make_features(p):
     
     df.drop(init_col, axis=1, inplace=True)
     
-    utils.to_pickles(result, f'../data/204_{name}', utils.SPLIT_SIZE)
+    utils.to_pickles(df, f'../data/204_{name}', utils.SPLIT_SIZE)
 
 # =============================================================================
 # 
