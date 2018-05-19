@@ -2,9 +2,12 @@
 """
 
 train:
-
+    ['id', 'question_id', 'subreddit', 'question_utc', 'question_text',
+       'question_score', 'answer_utc', 'answer_text', 'answer_score']
+    
 test:
-
+    ['id', 'question_id', 'subreddit', 'question_utc', 'question_text',
+       'question_score', 'answer_utc', 'answer_text']
 
 """
 
