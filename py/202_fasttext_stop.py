@@ -53,16 +53,16 @@ def make_features(p):
     
     # get vec
     print(name, 'sum', round(st_time - time(), 4))
-    question_vec_sum = pd.DataFrame(list(df['q'].map(get_vector_with_words_sum))).add_prefix('q_vec_sum_')
-    answer_vec_sum   = pd.DataFrame(list(df['a'].map(get_vector_with_words_sum))).add_prefix('a_vec_sum_')
+    question_vec_sum = pd.DataFrame(list(df['q'].map(get_vector_with_words_sum))).add_prefix('q_stop_vec_sum_')
+    answer_vec_sum   = pd.DataFrame(list(df['a'].map(get_vector_with_words_sum))).add_prefix('a_stop_vec_sum_')
     
     print(name, 'mean', round(st_time - time(), 4))
-    question_vec_mean = pd.DataFrame(list(df['q'].map(get_vector_with_words_mean))).add_prefix('q_vec_mean_')
-    answer_vec_mean   = pd.DataFrame(list(df['a'].map(get_vector_with_words_mean))).add_prefix('a_vec_mean_')
+    question_vec_mean = pd.DataFrame(list(df['q'].map(get_vector_with_words_mean))).add_prefix('q_stop_vec_mean_')
+    answer_vec_mean   = pd.DataFrame(list(df['a'].map(get_vector_with_words_mean))).add_prefix('a_stop_vec_mean_')
     
     result = pd.concat([question_vec_sum, answer_vec_sum, question_vec_mean, answer_vec_mean], axis=1)
     
-    utils.to_pickles(result, f'../data/201_{name}', utils.SPLIT_SIZE)
+    utils.to_pickles(result, f'../data/202_{name}', utils.SPLIT_SIZE)
     
 # =============================================================================
 # 
