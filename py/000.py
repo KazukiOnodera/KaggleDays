@@ -17,11 +17,11 @@ system('mkdir ../data')
 train = pd.read_table('../input/train.csv.zip', delimiter='\t')
 test  = pd.read_table('../input/test.csv.zip', delimiter='\t')
 
-train['question_utc'] = pd.to_datetime(train['question_utc'])
-train['answer_utc'] = pd.to_datetime(train['answer_utc'])
+train['question_utc'] = pd.to_datetime(train['question_utc'], unit='s' )
+train['answer_utc'] = pd.to_datetime(train['answer_utc'], unit='s' )
 
-test['question_utc'] = pd.to_datetime(test['question_utc'])
-test['answer_utc'] = pd.to_datetime(test['answer_utc'])
+test['question_utc'] = pd.to_datetime(test['question_utc'], unit='s')
+test['answer_utc'] = pd.to_datetime(test['answer_utc'], unit='s')
 
 
 utils.to_pickles(train, '../data/train', utils.SPLIT_SIZE)
