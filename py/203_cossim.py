@@ -33,11 +33,15 @@ def make_features(p):
         df=test
         name='test'
     
+    init_col = df.columns.tolist()
+    
     vec_df = df.apply(get_sim, axis=1)
     df['cosine_sim'] = vec_df.apply(lambda x: x[0])
     df['cosine_sim_mean'] = vec_df.apply(lambda x: x[1])
     
-    utils.to_pickles(result, f'../data/203_{name}', utils.SPLIT_SIZE)
+    df.drop(init_col, axis=1, inplace=True)
+    
+    utils.to_pickles(df, f'../data/203_{name}', utils.SPLIT_SIZE)
 
 # =============================================================================
 # 
