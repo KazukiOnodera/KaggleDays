@@ -11,18 +11,19 @@ import numpy as np
 import gc
 from multiprocessing import Pool
 import utils
-utils.start(__file__)
+#utils.start(__file__)
 #==============================================================================
 
-USECOLS = ['a_dow', 'a_hour', 'timediff_a-q', 'a_len', 'a_count_words', 'a_count_unq_words']
 
 train = utils.load_train()[['question_id']]
 test  = utils.load_test()[['question_id']]
 
-train = pd.concat([train, utils.read_pickles('../data/101_train')])
-test = pd.concat([test, utils.read_pickles('../data/101_test')])
+train = pd.concat([train, utils.read_pickles('../data/101_train')], axis=1)
+test = pd.concat([test, utils.read_pickles('../data/101_test')], axis=1)
 
 gc.collect()
+
+USECOLS = ['a_dow', 'a_hour', 'timediff_a-q', 'a_len', 'a_count_words', 'a_count_unq_words']
 
 def nunique(x):
     return len(set(x))
