@@ -48,8 +48,8 @@ def make_features(p):
         df=test
         name='test'
     
-    df['q'] = df['question_text'].map(preprocess)
-    df['a'] = df['answer_text'].map(preprocess)
+    df['q'] = df['q_stop'].map(preprocess)
+    df['a'] = df['a_stop'].map(preprocess)
     
     # get vec
     print(name, 'sum', round(st_time - time(), 4))
