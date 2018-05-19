@@ -20,7 +20,9 @@ SEED = 71
 
 question_id = utils.load_train()[['question_id']]
 
-train_files = sorted(glob('../data/*_train'))
+#train_files = sorted(glob('../data/*_train'))
+train_files = ['../data/101_train', '../data/102_train', 
+               '../data/203_train', '../data/204_train']
 print(train_files)
 
 # =============================================================================
@@ -31,7 +33,8 @@ def subsample(folder):
     df = pd.concat([pd.read_pickle(f).sample(frac=FRAC, random_state=SEED) for f in files])
     return df
 
-X = pd.concat([question_id]+[subsample(f) for f in train_files], axis=1)
+X = pd.concat([question_id]+[utils.read_pickles(f) for f in train_files], axis=1)
+#X = pd.concat([question_id]+[subsample(f) for f in train_files], axis=1)
 y = utils.read_pickles('../data/label')['answer_score'].map(np.log1p)
 
 # =============================================================================
