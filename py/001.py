@@ -41,8 +41,8 @@ def multi_q(args):
     base = question.iloc[ix, 0]
     result = translate(base)
     
-#    if ix%1000==0:
-#        print(ix, base, result, round(utils.elapsed_minute(), 4))
+    if ix%1000==0:
+        print(ix, base, result, round(utils.elapsed_minute(), 4))
     
     return result
     
@@ -71,41 +71,41 @@ def multi_a(args):
 # for Q
 pool = Pool(16)
 args = zip(range(len(question)), ['es']*len(question))
-result = pool.map(multi_q, range(len(question)))
+result = pool.map(multi_q, args)
 question['q_es'] = result
-utils.to_pickles(question, '../data/question_es', utils.SPLIT_SIZE)
+#utils.to_pickles(question, '../data/question_es', utils.SPLIT_SIZE)
 pool.close()
 
-pool = Pool(16)
-args = zip(range(len(question)), ['de']*len(question))
-result = pool.map(multi_q, range(len(question)))
-question['q_de'] = result
-pool.close()
-
-pool = Pool(16)
-args = zip(range(len(question)), ['fr']*len(question))
-result = pool.map(multi_q, range(len(question)))
-question['q_fr'] = result
-pool.close()
+#pool = Pool(16)
+#args = zip(range(len(question)), ['de']*len(question))
+#result = pool.map(multi_q, args)
+#question['q_de'] = result
+#pool.close()
+#
+#pool = Pool(16)
+#args = zip(range(len(question)), ['fr']*len(question))
+#result = pool.map(multi_q, args)
+#question['q_fr'] = result
+#pool.close()
 
 # for A
 pool = Pool(16)
 args = zip(range(len(answer)), ['es']*len(answer))
-result = pool.map(multi_a, range(len(answer)))
+result = pool.map(multi_a, args)
 answer['a_es'] = result
 pool.close()
 
-pool = Pool(16)
-args = zip(range(len(answer)), ['de']*len(answer))
-result = pool.map(multi_a, range(len(answer)))
-answer['a_de'] = result
-pool.close()
-
-pool = Pool(16)
-args = zip(range(len(answer)), ['fr']*len(answer))
-result = pool.map(multi_a, range(len(answer)))
-answer['a_fr'] = result
-pool.close()
+#pool = Pool(16)
+#args = zip(range(len(answer)), ['de']*len(answer))
+#result = pool.map(multi_a, args)
+#answer['a_de'] = result
+#pool.close()
+#
+#pool = Pool(16)
+#args = zip(range(len(answer)), ['fr']*len(answer))
+#result = pool.map(multi_a, args)
+#answer['a_fr'] = result
+#pool.close()
 
 
 utils.to_pickles(question, '../data/question_tran', utils.SPLIT_SIZE)
