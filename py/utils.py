@@ -166,9 +166,12 @@ def load_train():
 def load_test():
     return read_pickles('../data/test')
 
-# =============================================================================
-# NLP
-# =============================================================================
+
+
+
+
+
+
 
 
 
@@ -176,8 +179,8 @@ def load_test():
 # =============================================================================
 # other API
 # =============================================================================
-def submit(file_path, comment='from API'):
-    os.system('kaggle competitions submit -c avito-demand-prediction -f {} -m "{}"'.format(file_path, comment))
+#def submit(file_path, comment='from API'):
+#    os.system('kaggle competitions submit -c avito-demand-prediction -f {} -m "{}"'.format(file_path, comment))
 
 import requests
 def send_line(message):
