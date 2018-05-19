@@ -1,0 +1,27 @@
+git clone git@github.com:KazukiOnodera/KaggleDays.git
+mkdir KaggleDays/input
+mkdir KaggleDays/output
+mkdir KaggleDays/py
+mkdir KaggleDays/py/LOG
+
+cd KaggleDays
+echo *.DS_Store > .gitignore
+echo input/ >> .gitignore
+echo output/ >> .gitignore
+echo data/ >> .gitignore
+echo external/ >> .gitignore
+echo py/.ipynb_checkpoints >> .gitignore
+echo py/*.model >> .gitignore
+echo py/*.p >> .gitignore
+cat .gitignore
+
+
+cd ~; mkdir nlp_source
+cd ~/nlp_source
+wget https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.ru.vec
+wget https://s3-us-west-1.amazonaws.com/fasttext-vectors/wiki.ru.zip
+wget https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.ru.300.vec.gz
+wget https://github.com/named-entity/nltk4russian
+wget http://www.redhenlab.org/home/the-cognitive-core-research-topics-in-red-hen/the-barnyard/russian-nlp
+wget https://github.com/nlpub/russe-evaluation/tree/master/russe/measures/word2vec
+
