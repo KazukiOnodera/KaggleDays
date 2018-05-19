@@ -22,7 +22,7 @@ question_id = utils.load_train()[['question_id']]
 
 #train_files = sorted(glob('../data/*_train'))
 train_files = ['../data/101_train', '../data/102_train', 
-               '../data/203_train', '../data/204_train']
+               '../data/203_train', '../data/204_train', '../data/701_train']
 print(train_files)
 
 # =============================================================================

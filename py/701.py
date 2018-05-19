@@ -13,7 +13,7 @@ import pandas as pd
 import numpy as np
 from multiprocessing import Pool
 import utils
-utils.start(__file__)
+#utils.start(__file__)
 #==============================================================================
 
 train = utils.load_train()
@@ -31,6 +31,7 @@ def make_features(p):
         df=test
         name='test'
     init_col = df.columns.tolist()
+    print(init_col)
     
     df['qlenchar'] = df.question_text.apply(len)
     df['qlenword'] = df.question_text.apply(lambda x:len(splittext(x)))
@@ -49,6 +50,7 @@ def make_features(p):
 #    df['subreddit_le'] = LabelEncoder().fit_transform(df.subreddit)
 #    df['qid'] = LabelEncoder().fit_transform(df.question_id)
     df = pd.get_dummies(df, columns=['subreddit'])
+    init_col.remove('subreddit')
     
     df['qdt_dow'] = pd.to_datetime(df.question_utc,origin='unix',unit='s').dt.dayofweek
     df['qdt_hour'] = pd.to_datetime(df.question_utc,origin='unix',unit='s').dt.hour
