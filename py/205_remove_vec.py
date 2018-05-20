@@ -12,8 +12,8 @@ import utils
 train = utils.read_pickles('../data/201_train')
 test  = utils.read_pickles('../data/201_test')
 
-train.iloc[:600].to_pickle('../data/train_vec.pkl')
-test.iloc[:600].to_pickle('../data/test_vec.pkl')
+train.iloc[0;, :600].to_pickle('../data/train_vec.pkl')
+test.iloc[0;, :600].to_pickle('../data/test_vec.pkl')
 
 
 
